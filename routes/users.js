@@ -14,7 +14,7 @@ router.post('/andrewByfham', function (req,res,next) {
   // Create post in db
   res.status(201).json({
     message: 'Post created successfully!',
-    post: { id: new Date().toISOString(), subjectName: SN, SubjectCode: SC }
+    post: { id: new Date().toISOString(), subjectName: SN + ":P", SubjectCode: SC }
   });
 });
 
