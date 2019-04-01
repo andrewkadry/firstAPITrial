@@ -1,3 +1,5 @@
+import * as mongoose from "mongoose";
+
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -5,6 +7,9 @@ var logger = require('morgan');
 var bodyParser = require('body-parser')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var authRouter = require('./routes/auth');
+var homeRouter = require('./routes/home');
+
 
 var app = express();
 app.use(bodyParser.json());
@@ -21,5 +26,15 @@ app.use((req,res,next)=>{
 });
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/auth', authRouter);
+app.use('/home', homeRouter);
 
-module.exports = app;
+
+mongoose
+    .connect(
+        'mongodb://robeto:robeto123@ds127139.mlab.com:27139/robeto'
+    )
+    .then(result => {
+       module.exports = app;
+    })
+    .catch(err => console.log(err));
